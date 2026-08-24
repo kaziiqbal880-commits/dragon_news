@@ -1,4 +1,4 @@
-
+"use client"
 import React from 'react';
 import Image from 'next/image';
 import { BsInstagram, BsTwitter, BsTwitterX } from 'react-icons/bs';
@@ -8,19 +8,27 @@ import swimming from '../../../assets/swimming.png';
 import playground from '../../../assets/playground.png'
 import man from '../../../assets/class.png'
 import bg from '../../../assets/bg.png'
+import { authClient } from '@/lib/auth-client';
 const RightsideBar = () => {
+
+    const GoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+        console.log(data)
+    };
     return (
         <div>
             <div>
                 <h1 className="font-bold text-md">Login With</h1>
                 <div className='flex flex-col gap-2 my-2'>
-                    <button className='btn border-slate-400 text-slate-500 flex justify-center items-center gap-1'>
+                    <button onClick={() => GoogleSignIn()} className='btn border-slate-400 text-slate-500 flex justify-center items-center gap-1'>
                         <FaGoogle />
                         Login With Google
                     </button>
                     <button className='btn flex justify-center items-center gap-1'>
                         <FaGithub />
-                        Login With Google
+                        Login With GitHub
                     </button>
                 </div>
             </div>
